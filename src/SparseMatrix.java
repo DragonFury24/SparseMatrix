@@ -16,12 +16,13 @@ public class SparseMatrix<anyType> implements Matrixable<anyType> {
     public void add(int r, int c, anyType x) {
         int tempKey = getKey(r, c);
 
-        for (int i = 0; i <= list.size(); i++) {
-            if (tempKey < getKey(i))
+        for (int i = 0; i < list.size(); i++) {
+            if (tempKey < getKey(i)) {
                 list.add(i, new Cell<anyType>(x, r, c));
-            else
-                list.add(new Cell<>(x, r, c));
+                return;
+            }
         }
+        list.add(new Cell<anyType>(x, r, c));
         //find the key at r, c -> tempKey
         //traverse through each Cell of list
         //find key of current Cell - currKey
@@ -36,7 +37,7 @@ public class SparseMatrix<anyType> implements Matrixable<anyType> {
         int tempKey = getKey(r, c);
         for (int i = 0; i < list.size(); i++) {
             if (tempKey == getKey(i))
-                return (anyType) list.get(i);
+                return (anyType) list.get(i).getValue();
         }
         return null;
 //find the key at r, c -> tempKey
@@ -54,13 +55,14 @@ public class SparseMatrix<anyType> implements Matrixable<anyType> {
         anyType oldValue = null;
         for (int i = 0; i < list.size(); i++) {
             if (tempKey == getKey(i)) {
-                oldValue = (anyType) list.get(i);
+                oldValue = (anyType) list.get(i).getValue();
                 list.get(i).setValue(x);
             }
-            return (anyType) oldValue;
+            return (anyType)oldValue;
         }
         list.add(new Cell<>(x, r, c));
-        return (anyType) list.get(list.size() - 1);
+
+        return get(r, c);
 
 //find the key at r, c -> tempKey
         //traverse through each Cell of list
@@ -85,11 +87,19 @@ public class SparseMatrix<anyType> implements Matrixable<anyType> {
         anyType oldValue = null;
         for (int i = 0; i < list.size(); i++) {
             if (tempKey == getKey(i)) {
-                oldValue = (anyType) list.get(i);
+                oldValue = (anyType) list.get(i).getValue();
                 list.remove(i);
             }
         }
-        return null;
+        /*
+        for Andy,
+        if (oldValue != null) {
+        return (anyType)oldValue
+        }else
+        return get(r, c);
+        **not the line below**
+         */
+        return oldValue != null ? (anyType)oldValue : null;
     }
 
     public int size() {
