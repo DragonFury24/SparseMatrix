@@ -36,7 +36,7 @@ public class SparseMatrix<anyType> implements Matrixable<anyType> {
         int tempKey = getKey(r, c);
         for (int i = 0; i < list.size(); i++) {
             if (tempKey == getKey(i))
-                return (anyType)list.get(i);
+                return (anyType) list.get(i);
         }
         return null;
 //find the key at r, c -> tempKey
@@ -54,13 +54,13 @@ public class SparseMatrix<anyType> implements Matrixable<anyType> {
         anyType oldValue = null;
         for (int i = 0; i < list.size(); i++) {
             if (tempKey == getKey(i)) {
-                oldValue = (anyType)list.get(i);
+                oldValue = (anyType) list.get(i);
                 list.get(i).setValue(x);
             }
-            return (anyType)oldValue;
+            return (anyType) oldValue;
         }
         list.add(new Cell<>(x, r, c));
-        return (anyType)list.get(list.size() - 1);
+        return (anyType) list.get(list.size() - 1);
 
 //find the key at r, c -> tempKey
         //traverse through each Cell of list
@@ -85,7 +85,7 @@ public class SparseMatrix<anyType> implements Matrixable<anyType> {
         anyType oldValue = null;
         for (int i = 0; i < list.size(); i++) {
             if (tempKey == getKey(i)) {
-                oldValue = (anyType)list.get(i);
+                oldValue = (anyType) list.get(i);
                 list.remove(i);
             }
         }
@@ -105,6 +105,6 @@ public class SparseMatrix<anyType> implements Matrixable<anyType> {
     }
 
     public String toString() {
-return "";
+        return "";
     }
 }
