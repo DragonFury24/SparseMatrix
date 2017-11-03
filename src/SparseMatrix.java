@@ -91,14 +91,6 @@ public class SparseMatrix<anyType> implements Matrixable<anyType> {
                 list.remove(i);
             }
         }
-        /*
-        for Andy,
-        if (oldValue != null) {
-        return (anyType)oldValue
-        }else
-        return get(r, c);
-        **not the line below**
-         */
         return oldValue != null ? (anyType)oldValue : null;
     }
 
