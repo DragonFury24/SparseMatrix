@@ -107,6 +107,17 @@ public class SparseMatrix<anyType> implements Matrixable<anyType> {
     }
 
     public String toString() {
-        return "";
+        StringBuilder stringBuilder = new StringBuilder();
+        String temp = "";
+        for (int r = 0; r < numRows; r++) {
+            for (int c = 0; c < numColumns; c++) {
+                if (get(r, c) != null)
+                    stringBuilder.append(get(r, c));
+                else
+                    stringBuilder.append("-");
+            }
+            stringBuilder.append("\n");
+        }
+        return stringBuilder.toString();
     }
 }
